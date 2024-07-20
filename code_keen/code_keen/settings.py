@@ -89,7 +89,7 @@ DATABASES = {
     }
 }
 
-DATABASES['default'] = dj_database_url.config()
+DATABASES['default'] = dj_database_url.parse('postgresql://postgres:EaQRuBkvgGlspEdDWOeHSeMEPOqtMcfA@monorail.proxy.rlwy.net:37442/railway', conn_max_age=600, ssl_require=True)
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
