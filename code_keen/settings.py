@@ -84,14 +84,25 @@ REST_FRAMEWORK = {
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
+<<<<<<< HEAD
+#     'default': {
+        # 'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+=======
     # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': BASE_DIR / 'db.sqlite3',
     # }
+>>>>>>> 83ee7c9f1167eae13a5625845170b448f09aed54
 }
-DATABASES['default'] = dj_database_url.parse("postgres://default:OnG8S7vHNJIz@ep-black-haze-a40a8ah7.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require", conn_max_age=600, ssl_require=True)
-
 # DATABASES['default'] = dj_database_url.parse("postgres://default:OnG8S7vHNJIz@ep-black-haze-a40a8ah7.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require", conn_max_age=600, ssl_require=True)
+
+<<<<<<< HEAD
+DATABASES['default'] = dj_database_url.parse('postgresql://postgres:EaQRuBkvgGlspEdDWOeHSeMEPOqtMcfA@monorail.proxy.rlwy.net:37442/railway', conn_max_age=600, ssl_require=True)
+=======
+# DATABASES['default'] = dj_database_url.parse("postgres://default:OnG8S7vHNJIz@ep-black-haze-a40a8ah7.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require", conn_max_age=600, ssl_require=True)
+>>>>>>> 83ee7c9f1167eae13a5625845170b448f09aed54
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
