@@ -1,0 +1,309 @@
+{% extends 'Navbar.html' %}
+
+{% block title %}
+Accounts | AqsaCollection
+{% endblock %}
+{% block start %}
+
+
+
+<div class="col">
+  
+
+    <div class="row  ">
+        <div class="col-2 mt-4">
+            <h6 style="font-family:'Times New Roman', Times, serif;font-weight: 600;font-size: 15px;">PRODUCT CATEGORIES</h6>
+            <p style="color: #999999;font-family:'Times New Roman', Times, serif;font-weight: 400;">COTTON (10)</p>
+            <p style="color: #999999;font-family:'Times New Roman', Times, serif;">Fabric (20)</p>
+            <p style="color: #999999;font-family:'Times New Roman', Times, serif;">INDIA COTTON (16)</p>
+            <p style="color: #999999;font-family:'Times New Roman', Times, serif;">1 PIECE (11)</p>
+            <p style="color: #999999;font-family:'Times New Roman', Times, serif;font-weight: 400;">WOMEN FASHION (114)</p>
+            <p style="color: #999999;font-family:'Times New Roman', Times, serif;">NEW ARRIVALS (78)</p>
+            <p style="color: #999999;font-family:'Times New Roman', Times, serif;">OLD ARRIVALS (49)</p>
+      
+        </div>
+        <div class="col-md-10">
+
+<div class="row">
+   
+   
+    <div id="cartItems" class=" col-md-8 ml-5  mb-2 p-4">
+      
+    </div>
+
+    <div class="card col-3 mt-5 p-4 " style="border-radius: 5px;width: 18rem;">
+        <h3>Shopping Cart</h3>
+        <ul id="cart-list" class="list-group list-group-flush">
+            <!-- Cart items will be dynamically added here -->
+        </ul>
+        <div id="total-price" class="card-body list-group-item">
+            Total Price: pkr:0.00 <!-- Placeholder for total price -->
+        </div>
+        <div class="card-body " data-toggle="modal" data-target="#exampleModal">
+            <div style="margin-left: 14px;width: 60%; border-radius: 5px; background-color: black; color: azure;font-size: 17px;text-align: center; text-decoration: none;padding:5px;"  style="border: none;background-color: black;color: #fff;" type="submit" id="checkout-button">Checkout</div>
+        </div>
+    </div>
+    
+    
+
+
+
+
+</div>
+        
+
+
+
+
+    </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Checkout</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form id="cart-form" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="cart_items" id="cart-items">
+                <small id="form-error" style="color:red; display:none;">Please fill all fields. All fields are required!</small>
+                <div class="form-group">
+                    <label for="number" class="col-form-label">Phone No:<small style="color:red">*</small></label>
+                    <input type="number" name="number" class="form-control" id="number" required>
+                </div>
+                <div class="form-group">
+                    <label for="city" class="col-form-label">City:<small style="color:red">*</small></label>
+                    <input class="form-control" id="city" name="city" required>
+                </div>
+                <div class="form-group">
+                    <label for="state" class="col-form-label">State:<small style="color:red">*</small></label>
+                    <input class="form-control" name="state" id="state" required>
+                </div>
+                <div class="form-group">
+                    <label for="message-text" class="col-form-label">Complete Address:<small style="color:red">*</small></label>
+                    <textarea class="form-control" name="address" id="message-text" required></textarea>
+                </div>
+               
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-dark"  value="Checkout">Checkout</button>
+                </div>
+            </form>
+            
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+    // Fetch cart items from localStorage
+    let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Initialize total price
+    let totalPrice = 0;
+
+    // Populate cart list and calculate total price
+    let cartList = document.getElementById('cart-list');
+    cartList.innerHTML = ''; 
+    cartList.style.borderRadius = '5px';
+    // Clear existing list items
+
+    cartItems.forEach(function(item) {
+        let li = document.createElement('li');
+        li.className = 'list-group-item';
+        let shortName = item.name.slice(0, 5);
+        li.innerHTML = `
+            <span style="float: left;">${shortName}</span>
+            <span style="float: right;">${item.price.toFixed(2)}.Rs</span>
+            <div style="clear: both;"></div>
+        `;
+        cartList.appendChild(li);
+
+        // Accumulate total price
+        totalPrice += item.price;
+    });
+
+    // Update total price display
+    let totalPriceElement = document.getElementById('total-price');
+    totalPriceElement.textContent = `Total: ${totalPrice.toFixed(2)}.Rs`;
+
+    // Get the form element
+    let cartForm = document.getElementById('cart-form');
+
+    // Add submit event listener to the form
+    cartForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        // Set the value of the hidden input field with cart items
+        document.getElementById('cart-items').value = JSON.stringify(cartItems);
+        var modal = document.getElementById('exampleModal');
+    if (modal) {
+        $(modal).modal('hide'); // Using Bootstrap jQuery method to hide the modal
+        // or
+        // modal.classList.remove('show'); // Remove 'show' class to hide the modal (for vanilla JavaScript approach)
+    }
+                    setTimeout(()=>{
+            alert('Your orders has been booked!')
+            localStorage.clear()
+            window.location.reload()
+                },3000)
+    });
+  
+});
+
+</script>
+<script>
+function displayCartItems() {
+    let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+    let cartContainer = document.getElementById('cartItems');
+    cartContainer.innerHTML = ''; // Clear existing items
+
+    cartItems.forEach(function(item, index) {
+        // Create elements for each item
+        let cardDiv = document.createElement('div');
+        cardDiv.className = 'card m-3 p-3';
+        cardDiv.style.display='flex';
+        cardDiv.style.flexDirection='row';
+        cardDiv.style.justifyContent='space-between';
+        cardDiv.style.height='100px';
+        cardDiv.style.borderRadius='30px'
+        
+        // let imgDiv = document.createElement('div');
+        // let imgElement = document.createElement('img');
+        // imgElement.src = item.img; // Assuming item.img is the URL of the product image
+        // imgElement.alt = 'Product Image';
+        // imgDiv.appendChild(imgElement);
+        let imgDiv = document.createElement('div');
+        let imgElement = document.createElement('img');
+        imgElement.src = item.img; // Assuming item.img is the URL of the product image
+        imgElement.alt = 'Product Image';
+        imgDiv.style.padding = '10px'; // Example: Adding padding to the div
+        imgElement.style.width = '60px'; 
+        imgElement.style.height = '60px'; 
+        imgDiv.appendChild(imgElement);
+        document.body.appendChild(imgDiv); // Example: Appending to the body
+
+        let detailsDiv = document.createElement('div');
+        detailsDiv.className = 'card-details';
+        let nameElement = document.createElement('div');
+        nameElement.textContent = item.name; // Assuming item.name is the product name
+        let priceElement = document.createElement('div');
+        priceElement.textContent = 'Price: ' + item.price+'.Rs';
+         // Assuming item.price is the product price
+        detailsDiv.appendChild(nameElement); // Assuming item.price is the product price
+     
+        detailsDiv.appendChild(priceElement);
+        let sizeElement = document.createElement('div');
+        sizeElement.textContent = 'Size: '+item.size; // Assuming item.name is the product name
+        
+        detailsDiv.appendChild(sizeElement);
+
+        let actionsDiv = document.createElement('div');
+        actionsDiv.className = 'card-actions';
+        let closeButton = document.createElement('button');
+        closeButton.type = 'button';
+        closeButton.className = 'close';
+        closeButton.setAttribute('aria-label', 'Close');
+        closeButton.innerHTML = '<span aria-hidden="true">&times;</span>';
+        closeButton.addEventListener('click', function() {
+            // Function to remove item from cart (localStorage or backend)
+            removeItemFromCart(index);
+        });
+        actionsDiv.appendChild(closeButton);
+
+        // Append elements to cardDiv
+        cardDiv.appendChild(imgDiv);
+        cardDiv.appendChild(detailsDiv);
+        cardDiv.appendChild(actionsDiv);
+
+        // Append cardDiv to cartContainer
+        cartContainer.appendChild(cardDiv);
+    });
+}
+
+// Function to remove item from cart (localStorage or backend)
+function removeItemFromCart(index) {
+    let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    cartItems.splice(index, 1); // Remove item at index
+    localStorage.setItem('cart', JSON.stringify(cartItems));
+    window.location.reload()
+    displayCartItems(); // Refresh cart display
+    getcountCartItems();
+}
+
+// Call displayCartItems initially to populate the cart
+
+
+
+    function getcountCartItems() {
+    document.addEventListener('DOMContentLoaded', function() {
+    // Fetch cart items from localStorage
+    let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Initialize total price
+    let totalPrice = 0;
+
+    // Populate cart list and calculate total price
+    let cartList = document.getElementById('cart-list');
+    cartList.innerHTML = ''; 
+    cartList.style.borderRadius='5px';
+    // Clear existing list items
+
+    cartItems.forEach(function(item) {
+        let li = document.createElement('li');
+        li.className = 'list-group-item ';
+        let shortName = item.name.slice(0, 5);
+        li.innerHTML = `
+            <span style="float: left;">${shortName}</span>
+            <span style="float: right;">${item.price.toFixed(2)}.Rs</span>
+            <div style="clear: both;"></div>
+        `;
+        cartList.appendChild(li);
+
+        // Accumulate total price
+        totalPrice += item.price;
+    });
+
+    // Update total price display
+    let totalPriceElement = document.getElementById('total-price');
+    totalPriceElement.textContent = `Total: ${totalPrice.toFixed(2)}.Rs`;
+});
+    }
+    displayCartItems();
+    getcountCartItems()
+    
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('checkout-form');
+    const errorText = document.getElementById('form-error');
+    const checkoutButton = document.getElementById('checkout');
+
+    checkoutButton.addEventListener('click', function(event) {
+        // Prevent default form submission behavior
+        event.preventDefault();
+
+        // Validate form fields
+        if (form.checkValidity()) {
+            // Form is valid, proceed with checkout or form submission logic
+            console.log('Form submitted successfully!');
+            // Add your checkout logic here
+        } else {
+            errorText.style.display = 'block';
+            // Form is invalid, show error message
+            setTimeout(function() {
+                errorText.style.display = 'none';
+            }, 3000);
+        }
+    });
+});
+
+</script>
+    
+{% endblock %}
+

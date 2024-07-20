@@ -1,0 +1,127 @@
+{% extends 'Navbar.html' %}
+
+{% block title %}
+Accounts | AqsaCollection
+{% endblock %}
+{% block start %}
+
+
+
+<div class="col">
+    <div class="row  mt-5">
+        <div class="col-3 ml-4 mb-3 " style="border-radius: 5px;">
+            <img src="{{ first_image.img.url}}" class="card-img-top img-fluid" alt="{{ product_data.product.p_name }} Image">
+   
+        </div>
+        <div class="col-md-2">
+            {% for image in images %}
+            <img src="{{ image.img.url }}" style="border: 1px solid black; margin: 2px;border-radius:5px;height: 120px;width: 140px;" class="card-img-top img-fluid" alt="{{ product.name }} Image">
+        {% endfor %}
+        </div>
+        <div class="col-md-6">
+    <div style="margin: 8px"> <h2 class="card-title-name">{{product.p_name}}</h2></div>
+    <div style="display: flex;flex-direction: row; padding: 5px;margin-left: 5px;">{% with sale_price=product.price|add:300 %}
+        <h2 style="text-decoration: line-through; color: #A0A0A0;" class="sale-price">Rs. {{ sale_price }}</h2>
+    {% endwith %}<h2 style="margin-left: 9px;">Rs. {{product.price}}</h2></div>
+                
+    <div style="display: flex;flex-direction: row;margin: 8px;padding: 8px;">
+      <h2 style="margin-right: 20px;">Size</h2>
+      <div class="form-check form-check-inline">
+          <input class="form-check-input " type="radio" name="sizeOptions" id="sizeSmall" value="Small">
+          <label class="form-check-label" for="sizeSmall">Small</label>
+      </div>
+      <div class="form-check form-check-inline">
+          <input class="form-check-input" checked type="radio" name="sizeOptions" id="sizeMedium" value="Medium">
+          <label class="form-check-label" for="sizeMedium">Medium</label>
+      </div>
+      <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="sizeOptions" id="sizeLarge" value="Large">
+          <label class="form-check-label" for="sizeLarge">Large</label>
+      </div>
+  </div>
+
+
+<div></div>
+<!-- <form  > -->
+  <!-- {% csrf_token %}  -->
+  <!-- <div style="margin-left: 14px;width: 60%; background-color: black; color: azure;font-size: 20px;text-align: center; text-decoration: none;padding:10px;" onclick=addToLocalStorage({{product.id}},{{product.price}},{{product.p_name}}) style="border: none;background-color: black;color: #fff;" type="submit" id="checkout-button">ADD TO CART</div> -->
+  {% if messages %}
+  <ul>
+      {% for message in messages %}
+      <div class="alrt alert-success p-4 m-2" type="submit" id="checkout-button">{{ message }}</div>
+  {% endfor %}
+  </ul>
+  {% else %}
+  <div style="margin-left: 14px;width: 60%; background-color: black; color: azure;font-size: 20px;text-align: center; text-decoration: none;padding:10px;" onclick="addToLocalStorage({{ product.id }}, {{ product.price }}, '{{ product.p_name }}','{{ first_image.img.url}}')" style="border: none;background-color: black;color: #fff;" type="submit" id="checkout-button">ADD TO CART</div>
+
+{% endif %}
+  
+
+<!-- </form> -->
+<div class="mt-5">
+    <div class="card text-center mb-5" style="box-shadow: none;background-color: #fff; border: 1px solid black;">
+        <div class="card-header">
+          <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+              <h3 class="nav-link active bg-dark text-light" href="#">Description</h3>
+            </li>
+           
+          </ul>
+        </div>
+        <div class="card-body" style="text-align: left ">
+        <div style="display: flex;margin: 2px;"><h6>Length</h6>: Normal</div>
+        <div style="display: flex;margin: 2px;"><h6>Fabric</h6>: Cotton</div>
+        <div style="display: flex;margin: 2px;"><h6>Pieces</h6>: 01 shirt piece Stitched, 01 Trouser Stitched </div>
+        <div style="display: flex;margin: 2px;"><h6>Color</h6>: 6 Colors</div>
+        <div style="display: flex;margin: 2px;"><h6>Style</h6>: Shirt and Trouser</div>
+        <div style="display: flex;margin: 2px;text-align: left;"><h6>Disclaimer</h6>:</div>
+        <div class="justify-content-start">Product colours may slightly vary from the photo shoot because of professional light. Finishing items may vary subject to availability.
+        </div>
+        <br>
+        <div style="display: flex;margin: 2px;"><h6>Washing Instructions</h6>:</div>
+        Machine Wash | Do Not Bleach | Machine Dry | Light Iron
+        </div>
+      </div>
+</div>
+
+    </div>
+</div>
+</div>
+<script>
+  function addToLocalStorage(id, price, name,img) {
+      // Create a product object
+      let size = document.querySelector('input[name="sizeOptions"]:checked');
+      if (size) {
+          size = size.value;
+         
+      } else {
+          alert('Please select a size');
+          return;
+      }
+      let product = {
+          id: id,
+          name: name,
+          price: price,
+          size:size,
+          img:img
+      };
+
+      // Retrieve the existing cart from local storage
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+      // Add the new product to the cart
+      cart.push(product);
+
+      // Save the updated cart back to local storage
+      localStorage.setItem('cart', JSON.stringify(cart));
+
+      // Alert the user
+      // alert(name + " has been added to your cart!");
+      // window.location.reload();
+      window.location.href = window.location.pathname + '?added=' + encodeURIComponent(name);
+
+  }
+</script>
+    
+{% endblock %}
+
