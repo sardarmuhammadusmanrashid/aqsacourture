@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
+from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -23,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-d*f+hk#!^#8d+@f1&ghcve&xr3mm99f&b6+!c6tc*%l69+aq96'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,8 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'keen_app',
     'accounts',
-    'geekyshows',
-    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +58,7 @@ ROOT_URLCONF = 'code_keen.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -89,7 +89,7 @@ DATABASES = {
     }
 }
 
-
+DATABASES['default'] = dj_database_url.config()
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
@@ -124,25 +124,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
+
+
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
+STATIC_ROOT = BASE_DIR / "staticfiles_build" / "static"
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-# DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-# STRIPE_SECREAT_KEY='sk_test_51PZuCnRxvTbd21DG0X52ncxCaTY25LmSxBmwJKS0h9SicunQM2aeorLnxnifrzos28KqFSq4BLUZAU0uaHI9galM00qOZvTui2'
-# STRIPE_PUBLIC_KEY='pk_test_51PZuCnRxvTbd21DGYcC5T0bCAh6FJBjQH00tLtP2bKobNNe8hiCe6YTzSaC6qXrLUhkbk60I44zH17geiy0ElZLH00lZGYTbAH'
-# CELERY_BROKER_URL='redis://127.0.0.1:6379'
-# CELERY_ACCEPT_CONTENT=['application/json']
-# CELERY_RESULT_SERIALIZER='json'
-# CELERY_TASK_SERIALIZER='json'
-# CELERY_TIMEZONE = "Asia/Kolkata"
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
-    ]
-}
+
 
 
 

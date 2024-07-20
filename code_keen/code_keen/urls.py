@@ -21,8 +21,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
+    path('', include('keen_app.urls')),
     path('new_arrivals/', include('keen_app.urls')),
-    path('gapi/', include('geekyshows.urls')),
 ]
 
 if settings.DEBUG:
