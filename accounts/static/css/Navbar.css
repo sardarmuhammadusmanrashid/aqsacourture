@@ -25,8 +25,8 @@ body{
 .move_link a:hover {
     transition: 1s;
     text-decoration: none;
-    color: red; /* Change color on hover */
-}
+    color: red; /* Change color on hover }
+
 .active-link {
     color: red !important;
 }
@@ -79,7 +79,7 @@ font-size: 30px;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+   
     margin-bottom: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -106,3 +106,36 @@ font-size: 30px;
     cursor: pointer;
     margin-left: 10px;
 }
+.new_arrivals_new,.new_arrivals_old{
+    display: none;
+}
+
+    @media (max-width: 576px) {
+        .navbar{
+            width: 105%;
+        }
+        .oneimg{
+            height: 200px;
+        }
+        .newcard{
+            margin-right: 10px;
+        }
+        .new_arrivals_new,.new_arrivals_old{
+            display: block;
+        }
+        .navbar_2{
+            display: none;
+        }
+        .newcourturecol {
+          text-align: center;
+        }
+      
+        
+      
+        .sale-price {
+          text-align: center;
+        }
+      
+      
+  
+  } 
