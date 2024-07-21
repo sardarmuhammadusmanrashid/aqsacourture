@@ -109,7 +109,22 @@ font-size: 30px;
 .new_arrivals_new,.new_arrivals_old{
     display: none;
 }
-
+.footer-logo {
+    max-width: 150px;
+    margin-bottom: 10px;
+}
+.social-icons a {
+    color: #fff;
+    margin-right: 15px;
+    font-size: 1.5rem;
+}
+.social-icons a:hover {
+    color: #ddd;
+}
+.footer-image img {
+    max-width: 100%;
+    height: auto;
+}
     @media (max-width: 576px) {
         .navbar{
             width: 105%;
