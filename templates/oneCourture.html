@@ -9,10 +9,10 @@ Accounts | AqsaCollection
 
 <div class="col">
     <div class="row  mt-5">
-        <div class="col-3 ml-4 mb-3 " style="border-radius: 5px;">
-            <img src="{{ first_image.img}}" style="cursor: pointer;" class="card-img-top img-fluid" alt="{{ product_data.product.p_name }} Image">
-   
+        <div class="col-12 col-sm-4 col-md-4 col-lg-3  mb-3" style="border-radius: 5px;">
+            <img src="{{ first_image.img }}" style="cursor: pointer;" class="card-img-top single_img img-fluid" alt="{{ product_data.product.p_name }} Image">
         </div>
+        
         <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -32,7 +32,7 @@ Accounts | AqsaCollection
             </div>
         </div>
     
-        <div class="col-md-2">
+        <div class="col-md-2 col-sm-2">
             {% for image in images %}
             <img src="{{ image.img}}" onclick="showImageInModal('{{ image.img }}')" style="cursor: pointer;border: 1px solid black; margin: 2px;border-radius:5px;height: 120px;width: 140px;" class="card-img-top img-fluid" alt="{{ product.name }} Image">
         {% endfor %}
@@ -71,7 +71,7 @@ Accounts | AqsaCollection
   {% endfor %}
   </ul>
   {% else %}
-  <div style="margin-left: 14px;width: 60%; background-color: black; color: azure;font-size: 20px;text-align: center; text-decoration: none;padding:10px;" onclick="addToLocalStorage({{ product.id }}, {{ product.price }}, '{{ product.p_name }}','{{ first_image.img.url}}')" style="border: none;background-color: black;color: #fff;" type="submit" id="checkout-button">ADD TO CART</div>
+  <div style="margin-left: 14px;width: 60%; background-color: black; color: azure;font-size: 20px;text-align: center; text-decoration: none;padding:10px;" onclick="addToLocalStorage({{ product.id }}, {{ product.price }}, '{{ product.p_name }}','{{ first_image.img}}')" style="border: none;background-color: black;color: #fff;" type="submit" id="checkout-button">ADD TO CART</div>
 
 {% endif %}
   
