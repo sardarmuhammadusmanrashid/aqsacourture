@@ -5,13 +5,9 @@ Accounts | AqsaCollection
 {% endblock %}
 {% block start %}
 
-
-
-<div class="col">
-  
-
-    <div class="row  ">
-        <div class="col-2 mt-4">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-md-2 mt-4 order-2 order-md-1">
             <h6 style="font-family:'Times New Roman', Times, serif;font-weight: 600;font-size: 15px;">PRODUCT CATEGORIES</h6>
             <p style="color: #999999;font-family:'Times New Roman', Times, serif;font-weight: 400;">COTTON (10)</p>
             <p style="color: #999999;font-family:'Times New Roman', Times, serif;">Fabric (20)</p>
@@ -20,84 +16,68 @@ Accounts | AqsaCollection
             <p style="color: #999999;font-family:'Times New Roman', Times, serif;font-weight: 400;">WOMEN FASHION (114)</p>
             <p style="color: #999999;font-family:'Times New Roman', Times, serif;">NEW ARRIVALS (78)</p>
             <p style="color: #999999;font-family:'Times New Roman', Times, serif;">OLD ARRIVALS (49)</p>
-      
         </div>
-        <div class="col-md-10">
-
-<div class="row">
-   
-   
-    <div id="cartItems" class=" col-md-8 ml-5  mb-2 p-4">
-      
-    </div>
-
-    <div class="card col-3 mt-5 p-4 " style="border-radius: 5px;width: 18rem;">
-        <h3>Shopping Cart</h3>
-        <ul id="cart-list" class="list-group list-group-flush">
-            <!-- Cart items will be dynamically added here -->
-        </ul>
-        <div id="total-price" class="card-body list-group-item">
-            Total Price: pkr:0.00 <!-- Placeholder for total price -->
+   <div class="col-12 col-md-10">
+            <div class="row">
+                <div id="cartItems" class="col-12 col-md-8 mb-2 p-4">
+                </div>
+                <div class="card col-12 col-md-4 mt-5 p-4" style="border-radius: 5px;">
+                    <h3>Shopping Cart</h3>
+                    <ul id="cart-list" class="list-group list-group-flush">
+                        <!-- Cart items will be dynamically added here -->
+                    </ul>
+                    <div id="total-price" class="card-body list-group-item">
+                        Total Price: pkr:0.00 <!-- Placeholder for total price -->
+                    </div>
+                    <div class="card-body" data-toggle="modal" data-target="#exampleModal">
+                        <div style="margin-left: auto; margin-right: auto; width: 100%; border-radius: 5px; background-color: black; color: azure;font-size: 17px;text-align: center; text-decoration: none;padding:5px;" type="submit" id="checkout-button">Checkout</div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="card-body " data-toggle="modal" data-target="#exampleModal">
-            <div style="margin-left: 14px;width: 60%; border-radius: 5px; background-color: black; color: azure;font-size: 17px;text-align: center; text-decoration: none;padding:5px;"  style="border: none;background-color: black;color: #fff;" type="submit" id="checkout-button">Checkout</div>
-        </div>
-    </div>
-    
-    
-
-
-
-
-</div>
-        
-
-
-
-
     </div>
 </div>
+
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Checkout</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Checkout</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="cart-form" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="cart_items" id="cart-items">
+                    <small id="form-error" style="color:red; display:none;">Please fill all fields. All fields are required!</small>
+                    <div class="form-group">
+                        <label for="number" class="col-form-label">Phone No:<small style="color:red">*</small></label>
+                        <input type="number" name="number" class="form-control" id="number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="city" class="col-form-label">City:<small style="color:red">*</small></label>
+                        <input class="form-control" id="city" name="city" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="state" class="col-form-label">State:<small style="color:red">*</small></label>
+                        <input class="form-control" name="state" id="state" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Complete Address:<small style="color:red">*</small></label>
+                        <textarea class="form-control" name="address" id="message-text" required></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-dark" value="Checkout">Checkout</button>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="modal-body">
-            <form id="cart-form" method="POST">
-                {% csrf_token %}
-                <input type="hidden" name="cart_items" id="cart-items">
-                <small id="form-error" style="color:red; display:none;">Please fill all fields. All fields are required!</small>
-                <div class="form-group">
-                    <label for="number" class="col-form-label">Phone No:<small style="color:red">*</small></label>
-                    <input type="number" name="number" class="form-control" id="number" required>
-                </div>
-                <div class="form-group">
-                    <label for="city" class="col-form-label">City:<small style="color:red">*</small></label>
-                    <input class="form-control" id="city" name="city" required>
-                </div>
-                <div class="form-group">
-                    <label for="state" class="col-form-label">State:<small style="color:red">*</small></label>
-                    <input class="form-control" name="state" id="state" required>
-                </div>
-                <div class="form-group">
-                    <label for="message-text" class="col-form-label">Complete Address:<small style="color:red">*</small></label>
-                    <textarea class="form-control" name="address" id="message-text" required></textarea>
-                </div>
-               
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-dark"  value="Checkout">Checkout</button>
-                </div>
-            </form>
-            
-      </div>
     </div>
-  </div>
 </div>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
 
@@ -191,7 +171,7 @@ function displayCartItems() {
         let detailsDiv = document.createElement('div');
         detailsDiv.className = 'card-details';
         let nameElement = document.createElement('div');
-        nameElement.textContent = item.name; // Assuming item.name is the product name
+        nameElement.textContent = item.name.slice(0,15)+'..'; // Assuming item.name is the product name
         let priceElement = document.createElement('div');
         priceElement.textContent = 'Price: ' + item.price+'.Rs';
          // Assuming item.price is the product price
