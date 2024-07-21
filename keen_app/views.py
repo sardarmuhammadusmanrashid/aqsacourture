@@ -10,7 +10,7 @@ def home(request):
     products_data = []
     
     for product in products:
-        first_image_url = product.images.first().img.url if product.images.exists() else None
+        first_image_url = product.images.first().img if product.images.exists() else None
         products_data.append({
             'product': product,
             'first_image_url': first_image_url

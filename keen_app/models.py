@@ -33,8 +33,10 @@ class Product(models.Model):
     def __str__(self):
         return str(self.p_name)
 class ImageVarient(models.Model):
-    img=models.ImageField(upload_to='images_') 
+    img = models.URLField(max_length=700) 
     p_product=models.ForeignKey(Product,on_delete=models.CASCADE,related_name='images')
+    def __str__(self):
+        return str(self.img)
 class Buy_product(models.Model):
     location=models.CharField(max_length=100)
     product_name=models.ForeignKey(Product,on_delete=models.CASCADE)

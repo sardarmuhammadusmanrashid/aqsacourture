@@ -29,8 +29,7 @@ Accounts | AqsaCollection
         <a style="text-decoration: none;" href="{% url 'details' i.product.id %}" >
         {% if i.first_image_url %}
         <img src="{{ i.first_image_url }}" class="card-img-top img-fluid" alt="{{ product_data.product.p_name }} Image">
-        <img src="{{ i.first_image_url }}"  class="card-img-top img-fluid" alt="{{ product_data.product.p_name }} Image">
-    {% else %}
+        {% else %}
         <p>No image available</p>
     {% endif %}
         <div class="card-body text-center">
