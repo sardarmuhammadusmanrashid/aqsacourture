@@ -7,60 +7,44 @@ Accounts | AqsaCollection
 
 
 
-<div class="col">
-    <div class="row  ">
-        <div class="col-2 mt-4">
-            <h6 style="font-family:'Times New Roman', Times, serif;font-weight: 600;font-size: 15px;">PRODUCT CATEGORIES</h6>
-            <p style="color: #999999;font-family:'Times New Roman', Times, serif;font-weight: 400;">COTTON (10)</p>
-            <p style="color: #999999;font-family:'Times New Roman', Times, serif;">Fabric (20)</p>
-            <p style="color: #999999;font-family:'Times New Roman', Times, serif;">INDIA COTTON (16)</p>
-            <p style="color: #999999;font-family:'Times New Roman', Times, serif;">1 PIECE (11)</p>
-            <p style="color: #999999;font-family:'Times New Roman', Times, serif;font-weight: 400;">WOMEN FASHION (114)</p>
-            <p style="color: #999999;font-family:'Times New Roman', Times, serif;">NEW ARRIVALS (78)</p>
-            <p style="color: #999999;font-family:'Times New Roman', Times, serif;">OLD ARRIVALS (49)</p>
-      
-        </div>
-        <div class="col-md-10">
-
-<div class="row">
-    {% for i in  products %}
-   
-    <div class="card col-md-3 mt-4 new_card  mr-1 ml-3 mb-2 p-2" style="width: 18rem;">
-        <a style="text-decoration: none;" href="{% url 'details' i.product.id %}" >
-        {% if i.first_image_url %}
-        <img src="{{ i.first_image_url }}" class="card-img-top img-fluid" alt="{{ product_data.product.p_name }} Image">
-        {% else %}
-        <p>No image available</p>
-    {% endif %}
-        <div class="card-body text-center">
-          <p class="card-text text-center " style="font-weight: bold;">{{i.product.p_name}}<br></p>
-            <small class="text-center" style="display:  flex; flex-direction: row; justify-content: center;">{% with sale_price=i.product.price|add:300 %}
-                <p aria-colspan="text-center" style="text-decoration: line-through; color: #A0A0A0;" class="sale-price">Rs. {{ sale_price }}</p>
-            {% endwith %}.RS. <h6>{{i.product.price}}</h6>.</small>
-           
-        </div>
-       
-    </a>
+<div class="container-fluid newcourture">
+    <div class="row newcourturerow">
+      <div class="col-lg-2 col-md-3 col-sm-4 col-12 mt-4 newcourturecol order-2 order-md-1">
+        <h6 style="font-family:'Times New Roman', Times, serif;font-weight: 600;font-size: 15px;">PRODUCT CATEGORIES</h6>
+        <p style="color: #999999;font-family:'Times New Roman', Times, serif;font-weight: 400;">COTTON (10)</p>
+        <p style="color: #999999;font-family:'Times New Roman', Times, serif;">Fabric (20)</p>
+        <p style="color: #999999;font-family:'Times New Roman', Times, serif;">INDIA COTTON (16)</p>
+        <p style="color: #999999;font-family:'Times New Roman', Times, serif;">1 PIECE (11)</p>
+        <p style="color: #999999;font-family:'Times New Roman', Times, serif;font-weight: 400;">WOMEN FASHION (114)</p>
+        <p style="color: #999999;font-family:'Times New Roman', Times, serif;">NEW ARRIVALS (78)</p>
+        <p style="color: #999999;font-family:'Times New Roman', Times, serif;">OLD ARRIVALS (49)</p>
       </div>
-    
-      {% endfor %}
-
-
-
-     
-
-
-
-
-</div>
-        
-
-
-
-
+      <div class="col-lg-9 col-md-9 col-sm-8 col-12 ">
+        <div class="row newcourturerow2">
+          {% for i in products %}
+          <div class="card newcourturecard col-lg-3 col-md-4 col-sm-6 col-12 mt-4 new_card mr-1 ml-3 mb-2 p-2" style="cursor: pointer;">
+            <a style="text-decoration: none;" href="{% url 'details' i.product.id %}">
+              {% if i.first_image_url %}
+              <img src="{{ i.first_image_url }}" class="card-img-top img-fluid oneimg" alt="{{ product_data.product.p_name }} Image">
+              {% else %}
+              <p>No image available</p>
+              {% endif %}
+              <div class="card-body text-center">
+                <p class="card-text text-center" style="font-weight: bold;">{{ i.product.p_name }}<br></p>
+                <small class="text-center" style="display: flex; flex-direction: row; justify-content: center;">
+                  {% with sale_price=i.product.price|add:300 %}
+                  <p aria-colspan="text-center" style="text-decoration: line-through; color: #A0A0A0;" class="sale-price">Rs. {{ sale_price }}</p>
+                  {% endwith %}.RS. <h6>{{ i.product.price }}</h6>.
+                </small>
+              </div>
+            </a>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
     </div>
-</div>
-</div>
+  </div>
+  
 
 
     
