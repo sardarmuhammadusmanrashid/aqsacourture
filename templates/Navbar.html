@@ -15,24 +15,41 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
     <title>{% block title %}{% endblock %}</title>
-    <link rel="shortcut icon" href="https://www.dropbox.com/scl/fi/6lmc7zjye613kv84nvn6a/icon-modified.png?rlkey=joc252dwcs7miyjdbtnz35hqk&st=41n1bvnp&raw=1">
-    
+
 </head>
+
+
+
 <body>
     <!-- As a heading -->
     <div>
-        <nav class="navbar navbar-dark bg-dark justify-content-center">
-            <span class="navbar-brand mb-0 h1 text-light" style="font-size: 40px;">Aqsa Courture</span>
-            <div class="mt-4 ">
-                <a href=""><i class="bi bi-person-add text-light"></i></a>
-                <a href="{% url   'cart'  %}"><i class="bi bi-cart3 text-light position-relative"><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-count">0</span></i></a>
-
-            </div>  
-        </nav>
+        <nav class="navbar navbar-dark bg-dark">
+            <a class="navbar-brand" href="/">Aqsa Couture</a>
+           
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item new_arrivals_new">
+                    
+                  <a class="nav-link" href="/new_arrivals/new">New Couture</a>
+                </li>
+                <li class="nav-item nav-item new_arrivals_old">
+                  <a class="nav-link" href="/new_arrivals/old">Old Couture</a>
+                </li>
+              </ul>
+            </div>
+            <div class="mt-4 mr-4">
+              <a href=""><i class="bi bi-person-add text-light"></i></a>
+              <a href="{% url 'cart' %}"><i class="bi bi-cart3 text-light position-relative"><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-count">0</span></i></a>
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+          </nav>
+          
     </div>
    
     <div>
-        <nav class="navbar bg-light justify-content-center">
+        <nav class="navbar bg-light justify-content-center navbar_2">
             <form class="form-inline">
                 <div class="ml-5 mr-5 move_link"  ><a href="/new_arrivals/new"   class="{% if request.path == '/new_arrivals/new' %}active-link{% endif %}">New Courture</a></div>
                 <div class="mr-5 move_link"><a  href="/new_arrivals/old" class="{% if request.path == '/new_arrivals/old' %}active-link{% endif %}">Old Courture</a></div>
@@ -53,10 +70,11 @@
             updateCartCount();
         };
 </script>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>    
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 </body>
 </html>
